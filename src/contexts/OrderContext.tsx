@@ -1,25 +1,40 @@
 'use client'
 import {
-  Dispatch,
   ReactNode,
-  SetStateAction,
   createContext,
+  useContext,
   useEffect,
   useState,
 } from 'react'
+import { PedidoContext } from './PedidosContext'
+import { Pedido } from '@/lib/models/Pedido'
+import { ItemPedido } from '@/lib/models/ItemPedido'
 
 type DishType = {
-  id: number
+  id?: number
   table: number
   img: string
   name: string
   value: number
 }
 
+// type OrderType = {
+//   mesa: number
+//   order: {
+//     list: DishType[]
+//     sendOrder?: () => void
+//     addItem: (item: DishType) => void
+//     rmItem: (id: number) => void
+//   }
+// }
+
 export type OrderContextType = {
   list: DishType[]
-  addOrder: (item: DishType) => void
-  rmOrder: (id: number) => void
+  sendOrder: (mesa: number) => void
+  addItem: (item: DishType) => void
+  rmItem: (id: number) => void
+  getTotal: () => number
+  clear: () => void
 }
 
 export const OrderContext = createContext({} as OrderContextType)
@@ -27,22 +42,60 @@ export const OrderContext = createContext({} as OrderContextType)
 export const OrderProvider = ({ children }: { children: ReactNode }) => {
   const [list, setList] = useState<DishType[]>([])
 
-  function addOrder(item: DishType) {
+  const { addPedido, qtdPedidos } = useContext(PedidoContext)
+
+  function addItem(item: DishType) {
+    // for (let index = 0; index < list.length; index++) {
+    //   if(list[index].mesa == mesa){
+    //     setList(list.slice(index+1))
+    //   }
+    // }
     setList([...list, item])
   }
 
-  function rmOrder(id: number) {
-    setList(list.filter((item) => item.id !== id))
+  function rmItem(id: number) {
+    const rmItem = list.findIndex((item) => item.id == id)
+
+    setList(list.filter((_, index) => index != rmItem))
   }
 
-  useEffect(() => console.log(list), [list])
+  const clear = () => {
+    setList([])
+  }
+
+  const getTotal = () => {
+    var total = 0
+
+    for (let index = 0; index < list.length; index++) {
+      total += list[index].value
+    }
+
+    return total
+  }
+
+  const sendOrder = (mesa: number) => {
+    const pedido = new Pedido(qtdPedidos + 1, mesa)
+
+    for (let index = 0; index < list.length; index++) {
+      const item = new ItemPedido(index, list[index].name, 1, '')
+
+      pedido.addItem(item)
+    }
+
+    addPedido(pedido)
+  }
+
+  useEffect(() => console.log([list.length, list]), [list])
 
   return (
     <OrderContext.Provider
       value={{
         list,
-        addOrder,
-        rmOrder,
+        addItem,
+        rmItem,
+        clear,
+        getTotal,
+        sendOrder,
       }}
     >
       {children}

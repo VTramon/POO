@@ -1,11 +1,11 @@
-type DialogCardType = {
+type ModalCardType = {
   dish: string
   order: number
   table: number
   onClick: () => void
 }
 
-const DialogCard = ({ props }: { props: DialogCardType }) => {
+const ModalCard = ({ props }: { props: ModalCardType }) => {
   return (
     <div>
       <p>{props.dish}</p>
@@ -16,4 +16,4 @@ const DialogCard = ({ props }: { props: DialogCardType }) => {
   )
 }
 
-export default DialogCard
+export default ModalCard

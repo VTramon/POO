@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { DialogContexProvider } from '@/contexts/DialogContext'
 import { OrderProvider } from '@/contexts/OrderContext'
+import { ModalProvider } from '@/contexts/ModalContext'
+import { PedidoProvider } from '@/contexts/PedidosContext'
 
 export const metadata: Metadata = {
   title: 'POO',
@@ -14,12 +15,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <DialogContexProvider>
+    <PedidoProvider>
       <OrderProvider>
-        <html lang="pt_BR">
-          <body>{children}</body>
-        </html>
+        <ModalProvider>
+          <html lang="pt_BR">
+            <body>{children}</body>
+          </html>
+        </ModalProvider>
       </OrderProvider>
-    </DialogContexProvider>
+    </PedidoProvider>
   )
 }
