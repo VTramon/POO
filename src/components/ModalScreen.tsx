@@ -42,6 +42,8 @@ const ModalScreen = () => {
         onClick={(e) => e.stopPropagation()}
         className="flex flex-col justify-center items-center relative w-5/6 h-5/6 bg-slate-100 rounded-3xl overflow-scroll"
       >
+        <h2>Lista de pedidos realizados</h2>
+
         {handleList()}
       </div>
     </div>
