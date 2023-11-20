@@ -1,6 +1,5 @@
 'use client'
 
-import DialogButton from '@/components/DialogButton'
 import DishCard from '@/components/DishCard'
 import ModalMesas from '@/components/ModalMesas'
 import ModalScreen from '@/components/ModalScreen'
