@@ -13,6 +13,8 @@ import { OrderContext } from './OrderContext'
 export type ModalContextType = {
   cart: boolean
   handleCart: () => void
+  sent: boolean
+  handleSending: () => void
   screen: boolean
   handleScreen: () => void
   mesa: boolean
@@ -30,10 +32,19 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState(false)
   const [screen, setScreen] = useState(false)
   const [mesa, setMesa] = useState(false)
+  const [sent, setSent] = useState(false)
   const [mesaId, setMesaId] = useState<number>(0)
 
   const handleCart = () => {
     setCart(!cart)
+  }
+
+  const handleSending = () => {
+    setSent(true)
+
+    setTimeout(() => {
+      setSent(false)
+    }, 2000)
   }
 
   const handleScreen = () => {
@@ -59,6 +70,8 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
         mesa,
         mesaId,
         handleMesa,
+        sent,
+        handleSending,
       }}
     >
       {children}

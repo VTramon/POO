@@ -38,7 +38,8 @@ const ModalCart = () => {
     return data
   }
 
-  const { handleMesa, mesa, mesaId, handleCart } = useContext(ModalContext)
+  const { handleMesa, mesa, mesaId, handleCart, handleSending } =
+    useContext(ModalContext)
   const { getTotal, list, rmItem, addItem, sendOrder, clear } =
     useContext(OrderContext)
 
@@ -49,6 +50,7 @@ const ModalCart = () => {
     clear()
     handleMesa(mesaId)
     handleCart()
+    handleSending()
   }
   return (
     <div

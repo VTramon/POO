@@ -4,6 +4,7 @@ import DishCard from '@/components/DishCard'
 import ModalCart from '@/components/ModalCart'
 import ModalMesas from '@/components/ModalMesas'
 import ModalScreen from '@/components/ModalScreen'
+import SentModal from '@/components/SentModal'
 import { ModalContext } from '@/contexts/ModalContext'
 import { OrderContext } from '@/contexts/OrderContext'
 import { mesas, pratos } from '@/utils'
@@ -53,7 +54,7 @@ export default function Home() {
   }
 
   const { list, addItem, rmItem } = useContext(OrderContext)
-  const { handleMesa, handleScreen, mesa, screen, mesaId, cart } =
+  const { handleMesa, handleScreen, mesa, screen, mesaId, cart, sent } =
     useContext(ModalContext)
 
   return (
@@ -65,6 +66,7 @@ export default function Home() {
       >
         Tela de pedidos
       </button>
+      {sent ? <SentModal /> : null}
       {cart ? <ModalCart /> : null}
       {mesa ? <ModalMesas props={{ id: mesaId }} /> : null}
       {screen ? <ModalScreen /> : null}
