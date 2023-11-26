@@ -42,7 +42,8 @@ export const OrderContext = createContext({} as OrderContextType)
 export const OrderProvider = ({ children }: { children: ReactNode }) => {
   const [list, setList] = useState<DishType[]>([])
 
-  const { addPedido, qtdPedidos } = useContext(PedidoContext)
+  const { addPedido, qtdPedidos, addItemPedido, itemPedido } =
+    useContext(PedidoContext)
 
   function addItem(item: DishType) {
     // for (let index = 0; index < list.length; index++) {
@@ -77,15 +78,29 @@ export const OrderProvider = ({ children }: { children: ReactNode }) => {
     const pedido = new Pedido(qtdPedidos + 1, mesa)
 
     for (let index = 0; index < list.length; index++) {
-      const item = new ItemPedido(index, list[index].name, 1, '')
+      const item = new ItemPedido(
+        itemPedido.length + 1 + index,
+        list[index].name,
+        1,
+        ''
+      )
 
+      // console.log(item)
       pedido.addItem(item)
+      addItemPedido(item)
     }
+    console.log(pedido)
+
+    var temp: ItemPedido[] = []
+    temp.concat(itemPedido)
+    temp.concat(pedido.list_itens)
+
+    // setItemPedido(temp)
 
     addPedido(pedido)
   }
 
-  useEffect(() => console.log([list.length, list]), [list])
+  // useEffect(() => console.log([list.length, list]), [list])
 
   return (
     <OrderContext.Provider

@@ -8,7 +8,8 @@ import ModalCard from './ModalCard'
 
 const ModalScreen = () => {
   const { handleScreen } = useContext(ModalContext)
-  const { getPedidos, removePedido } = useContext(PedidoContext)
+  const { getPedidos, removePedido, removeItemPedido, itemPedido } =
+    useContext(PedidoContext)
 
   const pedidos = getPedidos()
 
@@ -26,6 +27,7 @@ const ModalScreen = () => {
             order: item.pedido,
             table: item.mesa,
             onClick: () => removePedido(item.pedido),
+            // onClick: () => teste(),
           }}
         />
       )
@@ -35,14 +37,14 @@ const ModalScreen = () => {
 
   return (
     <div
-      className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 flex justify-center items-center overflow-hidden"
+      className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 flex justify-center items-center overflow-hidden z-[2]"
       onClick={() => handleScreen()}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         className="flex flex-col justify-center items-center relative w-5/6 h-5/6 bg-slate-100 rounded-3xl overflow-scroll"
       >
-        <h2>Lista de pedidos realizados</h2>
+        <h2 className="text-3xl mb-4">Lista de pedidos realizados</h2>
 
         {handleList()}
       </div>

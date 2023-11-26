@@ -47,7 +47,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     setMesaId(id)
   }
 
-  useEffect(() => console.log([mesa, mesaId]), [mesa])
+  // useEffect(() => console.log([mesa, mesaId]), [mesa])
 
   return (
     <ModalContext.Provider
