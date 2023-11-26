@@ -9,6 +9,7 @@ import {
 import { PedidoContext } from './PedidosContext'
 import { Pedido } from '@/lib/models/Pedido'
 import { ItemPedido } from '@/lib/models/ItemPedido'
+import { pratos } from '@/utils'
 
 type DishType = {
   id?: number
@@ -55,7 +56,9 @@ export const OrderProvider = ({ children }: { children: ReactNode }) => {
   }
 
   function rmItem(id: number) {
-    const rmItem = list.findIndex((item) => item.id == id)
+    const rmItem = list.findIndex(
+      (item) => item.id == pratos.filter((item) => item.id == id)[0].id
+    )
 
     setList(list.filter((_, index) => index != rmItem))
   }

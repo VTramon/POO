@@ -6,7 +6,7 @@ import { ModalContext, ModalProps } from '@/contexts/ModalContext'
 import { X } from 'lucide-react'
 
 const ModalMesas = ({ props }: { props: ModalProps }) => {
-  const { handleMesa, mesa, mesaId } = useContext(ModalContext)
+  const { handleMesa, mesa, mesaId, handleCart } = useContext(ModalContext)
   const { addItem, rmItem, list, getTotal, sendOrder, clear } =
     useContext(OrderContext)
 
@@ -40,12 +40,6 @@ const ModalMesas = ({ props }: { props: ModalProps }) => {
     return list
   }
 
-  const handleSubmitOrder = () => {
-    sendOrder(mesaId)
-    clear()
-    handleMesa(props.id)
-  }
-
   return (
     <div
       className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 flex justify-center items-center overflow-hidden z-[2]"
@@ -67,7 +61,7 @@ const ModalMesas = ({ props }: { props: ModalProps }) => {
         </ol>
 
         <button
-          onClick={handleSubmitOrder}
+          onClick={handleCart}
           className="flex justify-around items-center w-2/5 h-11 bg-orange-500 rounded-t-xl rounded-b-[50px] mb-9"
         >
           <p className="text-white font-bold text-xl">

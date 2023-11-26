@@ -31,7 +31,7 @@ const DishCard = ({ props }: { props: DishCardType }) => {
         <p className="mt-3 text-center">{props.name}</p>
 
         <div className="flex flex-row justify-between mt-2 w-full">
-          <p>{props.value}</p>
+          <p>R$ {props.value.toFixed(2)}</p>
 
           <div>
             {list.filter((item) => item.name == props.name).length > 0 ? (

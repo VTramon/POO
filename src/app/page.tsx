@@ -1,6 +1,7 @@
 'use client'
 
 import DishCard from '@/components/DishCard'
+import ModalCart from '@/components/ModalCart'
 import ModalMesas from '@/components/ModalMesas'
 import ModalScreen from '@/components/ModalScreen'
 import { ModalContext } from '@/contexts/ModalContext'
@@ -52,7 +53,7 @@ export default function Home() {
   }
 
   const { list, addItem, rmItem } = useContext(OrderContext)
-  const { handleMesa, handleScreen, mesa, screen, mesaId } =
+  const { handleMesa, handleScreen, mesa, screen, mesaId, cart } =
     useContext(ModalContext)
 
   return (
@@ -64,6 +65,7 @@ export default function Home() {
       >
         Tela de pedidos
       </button>
+      {cart ? <ModalCart /> : null}
       {mesa ? <ModalMesas props={{ id: mesaId }} /> : null}
       {screen ? <ModalScreen /> : null}
       <ul className="flex flex-row ">{handleTables()}</ul>
