@@ -5,6 +5,7 @@ import { pratos } from '@/utils'
 import DishCard from './DishCard'
 import { PedidoContext } from '@/contexts/PedidosContext'
 import ModalCard from './ModalCard'
+import { X } from 'lucide-react'
 
 const ModalScreen = () => {
   const { handleScreen } = useContext(ModalContext)
@@ -44,6 +45,12 @@ const ModalScreen = () => {
         onClick={(e) => e.stopPropagation()}
         className="flex flex-col justify-center items-center relative w-5/6 h-5/6 bg-slate-100 rounded-3xl overflow-scroll"
       >
+        <button
+          className="absolute top-0 right-0 w-9 h-9 mr-4 mt-4"
+          onClick={() => handleScreen()}
+        >
+          <X width={36} height={36} />
+        </button>
         <h2 className="text-3xl mb-4">Lista de pedidos realizados</h2>
 
         {handleList()}
