@@ -42,6 +42,8 @@ const ModalCart = () => {
   const { getTotal, list, rmItem, addItem, sendOrder, clear } =
     useContext(OrderContext)
 
+  const total = getTotal().toFixed(2).toString().split('.')
+
   const handleSubmitOrder = () => {
     sendOrder(mesaId)
     clear()
@@ -63,11 +65,26 @@ const ModalCart = () => {
         >
           <X width={36} height={36} />
         </button>
-        <h2 className="text-3xl mb-4">Carrinho</h2>
+        <h2 className="text-3xl mb-4 text-zinc-700 font-bold">Carrinho</h2>
 
         {handleList()}
 
-        <button onClick={handleSubmitOrder}>Enviar pedido</button>
+        <div className="flex justify-around items-center w-3/12 h-11 bg-transparent border-[1px] border-black rounded-t-xl rounded-b-[50px] mb-9">
+          <p className="text-black font-bold text-xl">
+            {list.length == 1 ? list.length + ' item' : list.length + ' itens'}
+          </p>
+          <p className="text-black  text-xl">
+            <strong>R$ {total[0]},</strong>
+            {total[1]}
+          </p>
+        </div>
+
+        <button
+          className="bg-orange-500 h-9 w-1/5 rounded-xl text-slate-100 font-bold"
+          onClick={handleSubmitOrder}
+        >
+          Enviar pedido
+        </button>
       </div>
     </div>
   )

@@ -23,28 +23,19 @@ const CartCard = ({ props }: { props: CartCardType }) => {
     addItem(tempItem)
   }
 
-  const handleSubmitOrder = () => {
-    sendOrder(mesaId)
-    clear()
-    handleMesa(props.id)
-  }
-
   return (
-    <div>
-      <div>
-        <div>
-          <p>{props.name}</p>
-          <div>
-            <CartButton
-              props={{ type: 'minus', onClick: () => rmItem(props.id) }}
-            />
-            <div>{props.qtd}</div>
-            <CartButton
-              props={{ type: 'plus', onClick: () => addItemToCart() }}
-            />
-          </div>
-        </div>
+    <div className="flex justify-between w-1/4">
+      <div className="mr-4 mb-6">
+        <p className="font-bold text-zinc-700">{props.name}</p>
+        <p className="text-orange-500 font-bold">R$ {props.value.toFixed(2)}</p>
       </div>
+      <CartButton
+        props={{
+          qtd: props.qtd,
+          remove: () => rmItem(props.id),
+          add: () => addItemToCart(),
+        }}
+      />
     </div>
   )
 }
