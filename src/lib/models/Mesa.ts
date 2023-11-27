@@ -10,4 +10,13 @@ export class Mesa {
         this.id = id
         this.nome = nome
     }
+
+
+    public getId(){
+        return this.id
+    }
+    
+    public getNome(){
+        return this.nome
+    }
 }
